@@ -50,4 +50,14 @@ checkForBlockingWords(){
     fi
 }
 
-checkForBlockingWords "$title" "$labels"
+#Block if required words are NOT found in labels
+checkForRequiredWords(){
+    if  echo "${1}" | grep -iE "$REQUIRED_LIST"
+    then
+       return 0
+    else
+       return 1
+    fi
+}
+
+checkForBlockingWords "$title" "$labels" && checkForRequiredWords "$labels"
