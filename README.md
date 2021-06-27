@@ -4,6 +4,8 @@ A GitHub Action that blocks PRs that are tagged by WIP (et al) or have WIP in th
 
 Scans labels and title of the PR and fails if it encounters any of the blocked words in them.
 
+Extended to also block a PR if the REQUIRED_LIST is provided and the PR does not have a label that matches any of the values (note that only labels are checked and not the title)
+
 ## Usage
 
 If this solves your problems adding it to your project is straightforward 
@@ -26,6 +28,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BLOCK_LIST: "WIP|do not merge|backend not live"
+          REQUIRED_LIST: "release"
 ```
 
 Depending on your project's requrirements you may add / remove triggers and/or branches [Pull request events](https://help.github.com/en/articles/events-that-trigger-workflows#pull-request-event-pull_request)
